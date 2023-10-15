@@ -52,32 +52,6 @@ android {
     }
 }
 
-open class DownloadTokensJson : DefaultTask() {
-
-    @TaskAction
-    fun downloadFile() {
-        val url =
-            URL("https://raw.githubusercontent.com/Andrew2120/fiber-core/main/Tokens.kt")
-        val outputDir = File("fiber-android/src/main/java/com/b_labs/fiber_android") // Specify the assets folder
-        val outputFile = File(outputDir, "Tokens.kt")
-        val connection = url.openConnection()
-        connection.connect()
-        val inputStream = connection.getInputStream()
-
-        val outputStream = FileOutputStream(outputFile)
-        val buffer = ByteArray(4096)
-        var bytesRead: Int
-        while (inputStream.read(buffer).also { bytesRead = it } != -1) {
-            outputStream.write(buffer, 0, bytesRead)
-        }
-
-        inputStream.close()
-        outputStream.close()
-    }
-}
-tasks.register<DownloadTokensJson>("DownloadTokens")
-
-tasks.getByPath("preBuild").dependsOn("DownloadTokens")
 
 dependencies {
     implementation("com.beust:klaxon:5.5")
