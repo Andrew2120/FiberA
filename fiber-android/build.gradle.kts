@@ -39,7 +39,7 @@ open class DownloadTokensJson : DefaultTask() {
     @TaskAction
     fun downloadFile() {
         val url =
-            URL("https://raw.githubusercontent.com/Andrew2120/fiber-core/main/BTokens.kt")
+            URL("https://raw.githubusercontent.com/Andrew2120/fiber-core/main/Tokens.kt")
         val outputDir = File("fiber-android/src/main/java/com/b_labs/fiber_android") // Specify the assets folder
         val outputFile = File(outputDir, "Tokens.kt")
         val connection = url.openConnection()
@@ -61,19 +61,6 @@ tasks.register<DownloadTokensJson>("DownloadTokens")
 
 tasks.getByPath("preBuild").dependsOn("DownloadTokens")
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.github.fiber"
-                artifactId = "fiber-A"
-                version = "1.2"
-            }
-        }
-    }
-}
-
 dependencies {
     implementation("com.beust:klaxon:5.5")
     implementation("androidx.core:core-ktx:1.9.0")
@@ -82,4 +69,17 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.fiber"
+                artifactId = "fiber-A"
+                version = "1.3"
+            }
+        }
+    }
 }
