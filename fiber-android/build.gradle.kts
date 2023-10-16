@@ -39,7 +39,7 @@ open class DownloadTokensJson : DefaultTask() {
     @TaskAction
     fun downloadFile() {
         val url =
-            URL("https://raw.githubusercontent.com/Andrew2120/fiber-core/main/Tokens.kt")
+            URL("https://raw.githubusercontent.com/Andrew2120/fiber-core/main/BTokens.kt")
         val outputDir = File("fiber-android/src/main/java/com/b_labs/fiber_android") // Specify the assets folder
         val outputFile = File(outputDir, "Tokens.kt")
         val connection = url.openConnection()
@@ -68,7 +68,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.fiber"
                 artifactId = "fiber-A"
-                version = "1.1"
+                version = "1.2"
             }
         }
     }
